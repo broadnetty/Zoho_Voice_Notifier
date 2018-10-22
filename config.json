@@ -1,0 +1,10 @@
+{
+  "config" : {
+    "voice": {
+      "mp3player_cmd" : "mplayer",
+      "auth_json_path" : "/home/grizzly/Keys/MyFirstProject-2fe1b73ea829.json",
+      "temp_mp3_path" : "mp3temp.mp3",
+      "mp3_params" : "> /dev/null 2>&1"
+    }
+  }
+}
