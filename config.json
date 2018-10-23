@@ -1,10 +1,15 @@
 {
   "config" : {
     "voice": {
-      "mp3player_cmd" : "mplayer",
+      "mp3player_cmd" : "cmdmp3\\cmdmp3win.exe",
       "auth_json_path" : "/home/grizzly/Keys/MyFirstProject-2fe1b73ea829.json",
       "temp_mp3_path" : "mp3temp.mp3",
-      "mp3_params" : "> /dev/null 2>&1"
+      "mp3_params" : ""
+    },
+    "zoho": {
+      "auth_token" : "a5f59766837a1bc0e907cd1f9bdc393f",
+      "org_id" : "28909986",
+      "department_id" : "41840000000006907"
     }
   }
 }

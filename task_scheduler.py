@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
 import logging
-from logging.config import fileConfig
+from google_voice_API import *
+from zoho_control import *
+
 import datetime
-import requests
-import os, platform
 
 def init():
     #logger init
@@ -17,11 +17,20 @@ def init():
     logging.debug("Process exited %s", "successfully")
     return logger
 
-if __name__ == '__main__':
-    logger = init()
-    r = requests.get(
-        url='https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.users.ALL&client_id=1000.XP3JWFE5GPR51392180R2L6QAHXEVQ&response_type=code&access_type=online',
-        params=None, verify=False)
-    print(r.content)
+#if __name__ == '__main__':
+#    logger = init()
+
+#rs = ZohoWorker()
+
+config_path="config.json"
+#checking for alternate config path
+if 'ZOHO_SPEAKER_CONFIG_PATH' in os.environ:
+    config_path = os.environ['ZOHO_SPEAKER_CONFIG_PATH']
+
+with open(config_path) as fileconf:
+    config = json.load(fileconf)
+
+zoj = ZohoWorker(config['config']['zoho'])
+print(zoj.getTicketsByStatus(Status.pending))
 
 

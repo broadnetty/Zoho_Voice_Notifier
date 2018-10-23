@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 
 from google.cloud import texttospeech
-import os, sys,platform
+import os
+import platform
 import json
 
-
-class SynthSpeaker():
-
+class SynthSpeaker:
     #Load config from config.json
     def __init__(self):
         config_path="config.json"
@@ -18,29 +17,34 @@ class SynthSpeaker():
         #loading credentials downloaded
         with open(config_path) as fileconf:
             self.config = json.load(fileconf)
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = self.config['config']['voice']['auth_json_path']
+            if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
+                os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = self.config['config']['voice']['auth_json_path']
 
         self.setup('data')
+
+        if 'linux' in platform.system():
+            self.config['config']['voice']['mp3player_cmd'] = 'mplayer'
+            self.config['config']['voice']['mp3_params'] = '> /dev/null 2>&1'
         return
 
 
-    def download(self, text):
+    def download(self, text2say):
         try:
             client = texttospeech.TextToSpeechClient()
-            response = client.synthesize_speech(text, self.voice, self.audio_config)
+            response = client.synthesize_speech(text2say, self.voice, self.audio_config)
+            # The response's audio_content is binary.
+            with open(self.config['config']['voice']['temp_mp3_path'], 'wb') as out:
+                # Write the response to the output file.
+                out.write(response.audio_content)
+                print('Audio content written to file "output.mp3"')
+            return self.config['config']['voice']['temp_mp3_path']
         except Exception:
-            self.play('API_error.mp3')
+        #say if there was error
+            return 'API_error.mp3'
 
-        # The response's audio_content is binary.
-        with open(self.config['config']['voice']['temp_mp3_path'], 'wb') as out:
-            # Write the response to the output file.
-            out.write(response.audio_content)
-            print('Audio content written to file "output.mp3"')
-        return
 
     def play(self, file_path):
         print("Playing MP3..")
-
         os.system(self.config['config']['voice']['mp3player_cmd'] + ' '
                   + file_path + ' ' +
                   self.config['config']['voice']['mp3_params'])
@@ -48,8 +52,8 @@ class SynthSpeaker():
         return
 
     def say(self, text):
-        self.download(texttospeech.types.SynthesisInput(text=text))
-        self.play(self.config['config']['voice']['temp_mp3_path'])
+        #Starting player with path returned
+        self.play(self.download(texttospeech.types.SynthesisInput(ssml=text)))
         return
 
     def setup(self, data):
@@ -66,8 +70,8 @@ class SynthSpeaker():
 
 
 
-speaker = SynthSpeaker()
-text = ''
-with open('tempsubj.txt', 'r') as src:
-    text += str(src.readlines()) + '\n'
-speaker.say(text)
+#speaker = SynthSpeaker()
+#text = ''
+#with open('tempsubj.txt', 'r') as src:
+#    text += str(src.readlines()) + '\n'
+#speaker.say(text)
