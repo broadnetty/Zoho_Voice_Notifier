@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17256043-1de8-4315-9f57-26a89dc75228" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Zoho_Voice_Notifier.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Zoho_Voice_Notifier.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="17256043-1de8-4315-9f57-26a89dc75228" name="Default" comment="First tests - created speaker class (sketch) and adde warning when API isn not connecting. JSON config added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/google_voice_API.py" beforeDir="false" afterPath="$PROJECT_DIR$/google_voice_API.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/output.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mp3temp.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/mp3temp.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoho_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/zoho_control.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,40 +27,42 @@
         <counts>
           <entry key="ini" value="77" />
           <entry key="json" value="301" />
-          <entry key="py" value="1334" />
+          <entry key="py" value="1797" />
+          <entry key="txt" value="106" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="301" />
-          <entry key="PLAIN_TEXT" value="77" />
-          <entry key="Python" value="1334" />
+          <entry key="PLAIN_TEXT" value="183" />
+          <entry key="Python" value="1797" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ini" value="1" />
           <entry key="json" value="1" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/google_voice_API.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+            <state relative-caret-position="248">
+              <caret line="71" column="38" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="38" />
               <folding>
                 <element signature="e#20#57#0" expanded="true" />
-                <marker date="1540244866546" expanded="true" signature="152:657" ph="..." />
+                <marker date="1540275651955" expanded="true" signature="152:657" ph="..." />
               </folding>
             </state>
           </provider>
@@ -76,11 +77,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/zoho_control.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="263">
+              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+              <folding>
+                <element signature="e#19#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tempsubj.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -113,10 +126,10 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/logging_config.ini" />
         <option value="$PROJECT_DIR$/task_scheduler.py" />
-        <option value="$PROJECT_DIR$/zoho_control.py" />
         <option value="$PROJECT_DIR$/config.ini" />
         <option value="$PROJECT_DIR$/config.json" />
         <option value="$PROJECT_DIR$/google_voice_API.py" />
+        <option value="$PROJECT_DIR$/zoho_control.py" />
       </list>
     </option>
   </component>
@@ -225,13 +238,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="zoho_control" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Zoho_Voice_Notifier" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zoho_control.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.task_scheduler" />
       <item itemvalue="Python.google_voice_API" />
+      <item itemvalue="Python.zoho_control" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.google_voice_API" />
+        <item itemvalue="Python.zoho_control" />
         <item itemvalue="Python.task_scheduler" />
       </list>
     </recent_temporary>
@@ -268,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540229114187</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="First tests - created speaker class (sketch) and adde warning when API isn not connecting. JSON config added">
+      <created>1540245630792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1540245630793</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -301,16 +344,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First corrections from Pycharm Win" />
     <MESSAGE value="First tests - mp3 player added" />
-    <option name="LAST_COMMIT_MESSAGE" value="First tests - mp3 player added" />
+    <MESSAGE value="First tests - created speaker class (sketch) and adde warning when API isn not connecting. JSON config added" />
+    <option name="LAST_COMMIT_MESSAGE" value="First tests - created speaker class (sketch) and adde warning when API isn not connecting. JSON config added" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/zoho_control.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logging_config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -348,6 +385,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tempsubj.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/google_voice_API.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="71" column="38" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="38" />
+          <folding>
+            <element signature="e#20#57#0" expanded="true" />
+            <marker date="1540275651955" expanded="true" signature="152:657" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -355,13 +410,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/google_voice_API.py">
+    <entry file="file://$PROJECT_DIR$/zoho_control.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
-          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
           <folding>
-            <element signature="e#20#57#0" expanded="true" />
-            <marker date="1540244866546" expanded="true" signature="152:657" ph="..." />
+            <element signature="e#19#34#0" expanded="true" />
           </folding>
         </state>
       </provider>

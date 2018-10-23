@@ -67,5 +67,7 @@ class SynthSpeaker():
 
 
 speaker = SynthSpeaker()
-
-speaker.say('Hi guys!')
+text = ''
+with open('tempsubj.txt', 'r') as src:
+    text += str(src.readlines()) + '\n'
+speaker.say(text)
