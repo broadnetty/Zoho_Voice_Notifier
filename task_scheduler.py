@@ -79,18 +79,13 @@ global_notication = list ()
 notificated = list()
 
 def f1():
-    print('\n--\ntsk1 started')
     for ticket in zoj.getTicketsByStatus(Status.open):
-        print('\nchecking #' + ticket['ticketNumber'])
         if ticket['id'] not in notificated:
             global_notication.append(ticket)
-            print('adding to olds\n')
-
-
-    print(datetime.datetime.now())
+            print(datetime.datetime.now())
+            print(ticket['ticketNumber'] + ' has added to notified\n')
 
 def f2():
-    print('--\ntsk2 started')
     speaker = SynthSpeaker()
     for item in global_notication:
         if item['id'] not in notificated:
@@ -100,18 +95,14 @@ def f2():
             + '. Subject. ' \
             + item['subject']
             speaker.say(text)
-    print(datetime.datetime.now())
 
-def f3():
-    print('--\ntsk3 started')
-    print(datetime.datetime.now())
+def mf1():
+    f1()
+    f2()
 
 sch = TaskScheduler()
-sch.add_task(f1,5)
-sch.add_task(f2,5)
-sch.add_task(f3,45)
+sch.add_task(mf1,5)
 
 print('starting')
 sch.start_tasks()
 
-#print(datetime.datetime.now().time().__format__('%H:%M:%S'))
