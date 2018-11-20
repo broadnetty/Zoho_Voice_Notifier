@@ -19,6 +19,8 @@ def init_loger():
                         format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s')
     with open('logs\\' + str(datetime.datetime.today()).replace(':','-') + '.log', 'a') as logfile:
         logfile.writelines(['=' * 50,'\nStarting a new log...'])
+
+
     return logger
 
 
@@ -87,7 +89,11 @@ class ZHNotifier():
 
 
     def get_tickets(self):
-        for ticket in self.zhworker.getTicketsByStatus(Status.open):
+        open_tickets = self.zhworker.getTicketsByStatus(Status.open)
+        for ticket in self.global_notication:
+            if ticket not in open_tickets:
+                self.global_notication.remove(ticket)
+        for ticket in open_tickets:
             if ticket['id'] not in self.notificated:
                 self.global_notication.append(ticket)
                 print(datetime.datetime.now())
@@ -113,7 +119,7 @@ def main():
     log.info('Starting new loop')
 
     sch = TaskScheduler()
-    sch.add_task(ZHNotifier(),5)
+    sch.add_task(ZHNotifier(),10)
 
     print('starting')
     sch.start_tasks()
