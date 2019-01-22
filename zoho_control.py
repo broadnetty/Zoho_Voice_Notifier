@@ -17,7 +17,7 @@ class ZohoWorker:
         self.department_id = config_data['department_id']
         self.auth_token_id = config_data['auth_token']
         self.org_id = config_data['org_id']
-        self.HEADERS = {'Authorization': str('Zoho-authtoken ' + self.auth_token_id), 'orgId': self.org_id}
+        self.HEADERS = {'Content-Type': 'application/json','Authorization': str('Zoho-authtoken ' + self.auth_token_id), 'orgId': self.org_id}
         return
 
     def getTicketsByStatus(self, status):
@@ -26,11 +26,34 @@ class ZohoWorker:
                    #+ '&include=contacts,assignee'
         return self.APIrequest(url)
 
+    def getAgentById(self, id):
+        url = 'https://desk.zoho.com/api/v1/agents/' \
+                   + id \
+                   + '?include=profile'
+        r = requests.get(url=url, headers=self.HEADERS)
+        response = json.loads(r.content)
+        return response
+
+    def patchTicket(self, data, id):
+        url = 'https://desk.zoho.com/api/v1/tickets/' + id
+        r = requests.patch(url=url, headers=self.HEADERS, data=json.dumps(data))
+        try:
+            response = json.loads(r.content)
+            return response
+        except Exception:
+            print("Content: " + str(r.content))
+            return {}
+
+    def getTicket(self, id):
+        url = 'https://desk.zoho.com/api/v1/tickets/' + id
+        r = requests.get(url=url, headers=self.HEADERS)
+        response = json.loads(r.content)
+        return response
+
     def APIrequest(self,r_url):
         r = requests.get(url=r_url, headers=self.HEADERS)
         response = json.loads(r.content)
         return response['data']
-
 
 #rs = ZohoWorker(data)
 #print(str(rs.getTicketsByStatus(Status.pending)))
@@ -67,3 +90,6 @@ class ZohoWorker:
 # 		'direction': 'out'
 # 	}
 # }
+
+#C:\Users\Mikhail.Topskiy\Downloads\curl-7.62.0-win64-mingw\bin>
+# curl.exe -X GET https://desk.zoho.com/api/v1/tickets?include=assignee -H "orgId:28909986" -H "Authorization:Zoho-authtoken a5f59766837a1bc0e907cd1f9bdc393f"
