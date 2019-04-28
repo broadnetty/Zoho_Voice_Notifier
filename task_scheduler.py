@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+from notify_run import Notify
 import logging
 from google_voice_API import *
 from zoho_control import *
@@ -127,6 +127,16 @@ class ZHNotifier():
         else: self.notoficated = []
 
     def notify(self):
+        for item in self.global_notication:
+            if item['id'] not in self.notificated:
+                self.notificated.append(item['id'])
+                text = item['ticketNumber'] \
+                + ': ' \
+                + item['subject']
+                notify = Notify()
+                notify.send(text)
+
+    def notify_with_sound(self):
         speaker = SynthSpeaker()
         for item in self.global_notication:
             if item['id'] not in self.notificated:
@@ -146,7 +156,7 @@ class ZHNotifier():
 
 def main():
     speaker = SynthSpeaker()
-    speaker.say('  Attention! Staying late at the office may harm to your health. Please, finish your tasks as soon as possible and go home. For sake of your own safety, please finish your tasks and go home')
+
     log = init_loger()
     log.info('Starting new loop')
 
