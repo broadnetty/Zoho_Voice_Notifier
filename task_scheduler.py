@@ -131,12 +131,10 @@ class ZHNotifier():
         for item in self.global_notication:
             if item['id'] not in self.notificated:
                 self.notificated.append(item['id'])
-                text = 'You\'ve got a new open case number ' \
+                text = 'Dear lovely grizzly bear! You\'ve got a new open case number ' \
                 + item['ticketNumber'] \
                 + '. Subject. ' \
                 + item['subject']
-                speaker.say(text)
-                speaker.say(text)
                 speaker.say(text)
 
     def pickup(self, id):
@@ -147,6 +145,8 @@ class ZHNotifier():
         self.notify()
 
 def main():
+    speaker = SynthSpeaker()
+    speaker.say('  Attention! Staying late at the office may harm to your health. Please, finish your tasks as soon as possible and go home. For sake of your own safety, please finish your tasks and go home')
     log = init_loger()
     log.info('Starting new loop')
 

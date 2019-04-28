@@ -1,9 +1,10 @@
 #!/usr/bin/python
-
+import os
 import requests
 import json
 
-data = { 'auth_token':'a5f59766837a1bc0e907cd1f9bdc393f', 'org_id' : '28909986', 'department_id' : '41840000000006907' }
+auth_token = os.environ.get('zoho_auth_token')
+data = { 'auth_token':auth_token, 'org_id' : '28909986', 'department_id' : '41840000000006907' }
 
 class Status:
     pending = 'Waiting for the customer'
